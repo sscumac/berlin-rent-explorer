@@ -6,6 +6,7 @@ https://www.berlin.de/sen/wohnen/service/berliner-wohnungsmarkt/wohnatlas-berlin
 Please use a node version of 18 or above and run:
 
 yarn
+
 yarn dev
 
 Enjoy on any device:)
