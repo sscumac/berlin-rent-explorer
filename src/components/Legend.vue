@@ -57,38 +57,35 @@
         </div>
         <div class="w-full flex justify-between text-sm">
           <span>{{ minRent }}</span>
-          <span>{{ meanRent }}</span>
+          <span class="hidden md:block">{{ meanRent }}</span>
           <span>{{ maxRent }}</span>
         </div>
         <div class="w-full flex justify-center">
-          <div class="mt-2">Nettokaltmiete € / m²</div>
+          <div class="-mt-4 text-sm md:text-base md:mt-2">Nettokaltmiete € / m²</div>
         </div>
-        <div class="mt-6 text-sm">Daten: Wohnatlas Berlin 2009 und 2020</div>
+        <div class="mt-2 md:mt-6 text-xs md:text-sm">Daten: Wohnatlas Berlin 2009 und 2020</div>
       </div>
-      <div class="flex flex-col gap-2 items-center" :class="state && state < 5 && 'opacity-40'">
-        Werte in Farbskala:
-        <div class="flex gap-4 lg:flex-col">
-          <div class="flex items-center gap-2" :class="selectedYear === 2009 && 'opacity-60'">
+      <div
+        class="text-xs md:text-base flex md:flex-col gap-6 md:gap-2 items-start mt-4"
+        :class="state && state < 5 && 'opacity-40'"
+      >
+        Farbskala berücksichtigt Werte aus den Jahren:
+        <div class="flex gap-4 w-2/3 md:w-auto lg:flex-col">
+          <div
+            v-for="year in [2009, 2020]"
+            :key="year"
+            class="flex items-center gap-2"
+            :class="selectedYear === year ? 'opacity-60' : 'cursor-pointer'"
+            @click="selectedYear !== year && $emit('toggleColorScales2020')"
+          >
             <div class="w-10 h-10 p-0.5 flex justify-center items-center bg-gray-100 rounded transition-all">
               <button
-                :disabled="selectedYear === 2009"
-                class="w-6 h-6 border-0"
-                :class="colorScale2009 || selectedYear === 2009 ? 'bg-gray-400' : 'bg-white'"
-                @click="$emit('toggleColorScales2009')"
+                :disabled="selectedYear === year"
+                class="w-7 h-7 border-white border-4"
+                :class="colorScale2020 || selectedYear === year ? 'bg-gray-400' : 'bg-white'"
               />
             </div>
-            2009
-          </div>
-          <div class="flex items-center gap-2" :class="selectedYear === 2020 && 'opacity-60'">
-            <div class="w-10 h-10 p-0.5 flex justify-center items-center bg-gray-100 rounded transition-all">
-              <button
-                :disabled="selectedYear === 2020"
-                class="w-6 h-6 border-0"
-                :class="colorScale2020 || selectedYear === 2020 ? 'bg-gray-400' : 'bg-white'"
-                @click="$emit('toggleColorScales2020')"
-              />
-            </div>
-            2020
+            {{ year }}
           </div>
         </div>
       </div>
