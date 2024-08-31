@@ -3,7 +3,7 @@
     <div
       class="w-full text-gray-600 justify-between items-center lg:items-start flex flex-col lg:flex-row mt-4 gap-4 lg:gap-0"
     >
-      <div class="flex items-center justify-end relative" :class="state < 5 && 'opacity-40'">
+      <div class="flex items-center justify-end relative" :class="state && state < 5 && 'opacity-40'">
         <!-- zoom navigation-->
         <div class="flex justify-end mr-4 md:mr-10 md:w-auto">
           <button
@@ -65,7 +65,7 @@
         </div>
         <div class="mt-6 text-sm">Daten: Wohnatlas Berlin 2009 und 2020</div>
       </div>
-      <div class="flex flex-col gap-2 items-center" :class="state < 5 && 'opacity-40'">
+      <div class="flex flex-col gap-2 items-center" :class="state && state < 5 && 'opacity-40'">
         Werte in Farbskala:
         <div class="flex gap-4 lg:flex-col">
           <div class="flex items-center gap-2" :class="selectedYear === 2009 && 'opacity-60'">
