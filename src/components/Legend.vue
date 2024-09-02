@@ -76,13 +76,17 @@
             :key="year"
             class="flex items-center gap-2"
             :class="selectedYear === year ? 'opacity-60' : 'cursor-pointer'"
-            @click="selectedYear !== year && $emit('toggleColorScales2020')"
+            @click="toggleColorScales(year)"
           >
             <div class="w-10 h-10 p-0.5 flex justify-center items-center bg-gray-100 rounded transition-all">
               <button
                 :disabled="selectedYear === year"
                 class="w-7 h-7 border-white border-4"
-                :class="colorScale2020 || selectedYear === year ? 'bg-gray-400' : 'bg-white'"
+                :class="
+                  (year === 2009 && colorScale2009) || (year === 2020 && colorScale2020) || selectedYear === year
+                    ? 'bg-gray-400'
+                    : 'bg-white'
+                "
               />
             </div>
             {{ year }}
@@ -95,7 +99,7 @@
 
 <script setup lang="ts">
 // define all props
-defineProps<{
+const props = defineProps<{
   state: number | undefined;
   zoomLevel: number;
   minZoom: number | undefined;
@@ -113,7 +117,7 @@ defineProps<{
 }>();
 
 // emits
-defineEmits([
+const emits = defineEmits([
   "zoomIn",
   "zoomOut",
   "zoomInitial",
@@ -122,4 +126,8 @@ defineEmits([
   "toggleColorScales2009",
   "toggleColorScales2020",
 ]);
+
+function toggleColorScales(year: number) {
+  props.selectedYear !== year && (year === 2020 ? emits("toggleColorScales2020") : emits("toggleColorScales2009"));
+}
 </script>
