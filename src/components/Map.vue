@@ -296,7 +296,7 @@ function drawBorders() {
     // interaction
     .on("mouseenter", (e: MouseEvent, d: Feature) => {
       !mapIsMoving.value && d3.select(e.currentTarget).attr("opacity", 1);
-      const [x, y] = d3.pointer(e);
+      const [x, y] = d3.pointer(e, d3.select("#main-map").node());
       showTooltip(d.properties, [x, y]);
       currentPositionOnLegendScale();
     })
