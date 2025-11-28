@@ -70,6 +70,12 @@ type Feature = {
 type MapInfo = {
   type: string;
   features: Feature[];
+  objects: {
+    progs: {
+      type: string;
+      geometries: any[];
+    };
+  };
 };
 
 type Data = {
@@ -326,7 +332,7 @@ function showData(dataSource: Data[]) {
   });
 
   // extend topojson properties with addiotional data from dataset
-  mapInfo.features = topojson.feature(mapInfo, mapInfo.objects.progs).features.map((d) => {
+  mapInfo.features = topojson.feature(mapInfo, mapInfo.objects.progs).features.map((d: Feature) => {
     // mapInfo.features = mapInfo.features.map(d => {
     d.properties.ANGEBOTSMIETEN = dataIndex[d.properties.PROGNOSERA];
     return d;
